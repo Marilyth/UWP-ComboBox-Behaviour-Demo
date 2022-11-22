@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -24,7 +24,8 @@ namespace App1
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public ComboboxViewModel ComboboxViewModel { get; set; } = new ComboboxViewModel();
+        public List<string> Items { get; set; } = new List<string>() { "Test1", "Test2" };
+        public int SelectedIndex { get; set; } = 1;
 
         public MainPage()
         {
@@ -33,18 +34,16 @@ namespace App1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Replace ComboboxViewModel, keeping everything default.
-            ComboboxViewModel = new ComboboxViewModel();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ComboboxViewModel)));
+            // Replace Items, keeping everything default.
+            Items = new List<string>() { "Test1", "Test2" };
+            SelectedIndex = 1;
+
+            // Sets SelectedIndex to -1 if it wasn't -1. Otherwise the new SelectedIndex is untouched.
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Items)));
+
+            // Changing SelectedIndex here instead would avoid this bug.
+            // SelectedIndex = 1;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedIndex)));
         }
-    }
-
-    public class ComboboxViewModel
-    {
-        // This should always be 0. But it switches between -1 and 0 instead for every replacement.
-        public int SelectedIndex { get; set; } = 0;
-
-        // Hardcoding the Items into the .xaml doesn't trigger this bug.
-        public List<string> Items = new List<string>() { "Test1", "Test2" };
     }
 }
