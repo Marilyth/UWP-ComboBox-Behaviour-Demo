@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="App1.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,7 +13,10 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ComboBox ItemsSource="{x:Bind ComboboxViewModel.Items, Mode=OneWay}" SelectedIndex="{x:Bind ComboboxViewModel.SelectedIndex, Mode=TwoWay}" />
+        <ComboBox
+            x:Name="BugComboBox"
+            ItemsSource="{x:Bind Items, Mode=OneWay}"
+            SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
 
         <Button Grid.Row="1" Click="Button_Click">Trigger Bug</Button>
     </Grid>
