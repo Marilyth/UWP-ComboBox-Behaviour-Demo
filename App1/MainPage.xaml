@@ -13,10 +13,16 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <ComboBox
-            x:Name="BugComboBox"
-            ItemsSource="{x:Bind Items, Mode=OneWay}"
-            SelectedIndex="{x:Bind SelectedIndex, Mode=TwoWay}" />
+        <ListView ItemsSource="{x:Bind Items, Mode=OneWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Test">
+                    <ComboBox
+                        x:Name="BugComboBox"
+                        ItemsSource="{x:Bind Options, Mode=OneWay}"
+                        SelectedValue="{x:Bind SelectedItem, Mode=TwoWay}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Button Grid.Row="1" Click="Button_Click">Trigger Bug</Button>
     </Grid>
