@@ -13,6 +13,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
+        
+        <!--Happens only for ListView, replace with an ItemsControl and it stops.-->
         <ListView ItemsSource="{x:Bind Items, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Test">
